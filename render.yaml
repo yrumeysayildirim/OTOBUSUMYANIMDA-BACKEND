@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: otobus-api
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    branch: main
+    region: oregon
+    healthCheckPath: /docs
+    autoDeploy: true
