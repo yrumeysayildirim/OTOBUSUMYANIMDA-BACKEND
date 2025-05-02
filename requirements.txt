@@ -28,7 +28,6 @@ cycler=0.12.1=pypi_0
 debugpy=1.8.13=pypi_0
 decorator=5.2.1=pypi_0
 defusedxml=0.7.1=pypi_0
-django=5.2=pypi_0
 executing=2.2.0=pypi_0
 fastapi=0.115.12=pypi_0
 fastjsonschema=2.21.1=pypi_0
@@ -133,7 +132,6 @@ rpds-py=0.24.0=pypi_0
 scikit-learn=1.6.1=pypi_0
 scipy=1.15.2=pypi_0
 seaborn=0.13.2=pypi_0
-selenium=4.28.1=pypi_0
 send2trash=1.8.3=pypi_0
 setuptools=75.8.0=pyhff2d567_0
 shapely=2.0.7=pypi_0
