@@ -10,7 +10,7 @@ from model_api.regression_evening_model_api import evening_predict
 from model_api.regression_noon_model_api import noon_predict
 
 app = FastAPI()
-DOMAIN_NAME = "https://otobusumyanimda.com.tr/"
+DOMAIN_NAME = "https://otobusumyanimda.com.tr"
 RENDER_DOMAIN_NAME = "https://otobusum-yanimda-frontend.onrender.com"
 
 app.add_middleware(
