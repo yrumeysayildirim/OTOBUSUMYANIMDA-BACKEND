@@ -11,10 +11,11 @@ from model_api.regression_noon_model_api import noon_predict
 
 app = FastAPI()
 DOMAIN_NAME = "http://otobusumyanimda.com.tr"
+RENDER_DOMAIN_NAME = "https://otobusum-yanimda-frontend.onrender.com"
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[DOMAIN_NAME],
+    allow_origins=[DOMAIN_NAME, RENDER_DOMAIN_NAME],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
