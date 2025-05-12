@@ -12,6 +12,7 @@ from model_api.regression_noon_model_api import noon_predict
 app = FastAPI()
 DOMAIN_NAME = "https://otobusumyanimda.com.tr"
 RENDER_DOMAIN_NAME = "https://otobusum-yanimda-frontend.onrender.com"
+MODEL_PKL = ""
 
 app.add_middleware(
     CORSMiddleware,
@@ -191,7 +192,7 @@ async def prediction():
 
 async def prediction():
     
-    time = 720  # Ideally this should come from the request, but keeping as-is for now
+    time = 720  
     day = 0
 
     bus_preferences = {'474': 0.65, '486': 0.20, '472': 0.10, '477': 0.05}
@@ -250,7 +251,6 @@ async def prediction():
 @app.post('/density-classification-prediction')
 
 async def prediction(input: DensityPredictionInput):
-    # 🌟 Convert incoming strings to usable numbers
     time = convert_time_to_minutes(input.timeStr)
     day = encode_day(input.day)
     x = datetime.now()
@@ -260,7 +260,6 @@ async def prediction(input: DensityPredictionInput):
     if day == -1:
         return {"error": "Invalid day sent!"}
 
-    # 🛠 Now the rest of your original logic works exactly as before!
     bus_preferences = {'474': 0.65, '486': 0.20, '472': 0.10, '477': 0.05}
     student_count = None
 
@@ -296,18 +295,10 @@ async def prediction(input: DensityPredictionInput):
             elif ((time >= 840) and (time < 1140)):
                 student_count = evening_predict([time, day])
                 student_count = int(student_count)
-            else:
-                student_count = random.choice(range(10, 30))
-                student_count = int(student_count)
-    
-    if ((time >= 750) and (time < 820)):
-        student_count = random.choice(range(180, 300))
-        student_count = int(student_count)
-    # Now, split the total student count across buses based on preferences
+            
     
     bus_student_count = int(student_count)
 
-    # Predict density for each bus separately
     bus_density = classification_predict([time, bus_student_count, day])
 
     print(f'predicted_density : {bus_density}')
@@ -316,7 +307,7 @@ async def prediction(input: DensityPredictionInput):
 @app.post('/474-classification-prediction')
 
 async def prediction(input: PredictionInput):
-    # 🌟 Convert incoming strings to usable numbers
+ 
     time = convert_time_to_minutes(input.time)
     day = encode_day(input.day)
     x = datetime.now()
@@ -327,7 +318,6 @@ async def prediction(input: PredictionInput):
     if day == -1:
         return {"error": "Invalid day sent!"}
 
-    # 🛠 Now the rest of your original logic works exactly as before!
     bus_preferences = {'474': 0.65, '486': 0.20, '472': 0.10, '477': 0.05}
     student_count = None
 
@@ -363,18 +353,9 @@ async def prediction(input: PredictionInput):
             elif ((time >= 840) and (time < 1140)):
                 student_count = evening_predict([time, day])
                 student_count = int(student_count)
-            else:
-                student_count = random.choice(range(10, 30))
-                student_count = int(student_count)
-    
-    if ((time >= 750) and (time < 820)):
-        student_count = random.choice(range(180, 300))
-        student_count = int(student_count)
-    # Now, split the total student count across buses based on preferences
     
     bus_student_count = abs(int(student_count))
 
-    # Predict density for each bus separately
     bus_density = classification_predict([time, bus_student_count, day])
 
 
@@ -384,7 +365,7 @@ async def prediction(input: PredictionInput):
 @app.post('/477-classification-prediction')
 
 async def prediction(input: PredictionInput):
-    # 🌟 Convert incoming strings to usable numbers
+
     time = convert_time_to_minutes(input.time)
     day = encode_day(input.day)
     x = datetime.now()
@@ -394,7 +375,6 @@ async def prediction(input: PredictionInput):
     if day == -1:
         return {"error": "Invalid day sent!"}
 
-    # 🛠 Now the rest of your original logic works exactly as before!
     bus_preferences = {'474': 0.65, '486': 0.20, '472': 0.10, '477': 0.05}
     student_count = None
 
@@ -430,18 +410,11 @@ async def prediction(input: PredictionInput):
             elif ((time >= 840) and (time < 1140)):
                 student_count = evening_predict([time, day])
                 student_count = int(student_count)
-            else:
-                student_count = random.choice(range(10, 30))
-                student_count = int(student_count)
+            
     
-    if ((time >= 750) and (time < 820)):
-        student_count = random.choice(range(180, 300))
-        student_count = int(student_count)
-    # Now, split the total student count across buses based on preferences
-    
+
     bus_student_count = abs(int(student_count))
 
-    # Predict density for each bus separately
     bus_density = classification_predict([time, bus_student_count, day])
 
 
@@ -450,7 +423,7 @@ async def prediction(input: PredictionInput):
 @app.post('/472-classification-prediction')
 
 async def prediction(input: PredictionInput):
-    # 🌟 Convert incoming strings to usable numbers
+    
     time = convert_time_to_minutes(input.time)
     day = encode_day(input.day)
     x = datetime.now()
@@ -461,7 +434,6 @@ async def prediction(input: PredictionInput):
     if day == -1:
         return {"error": "Invalid day sent!"}
 
-    # 🛠 Now the rest of your original logic works exactly as before!
     bus_preferences = {'474': 0.65, '486': 0.20, '472': 0.10, '477': 0.05}
     student_count = None
 
@@ -497,19 +469,11 @@ async def prediction(input: PredictionInput):
             elif ((time >= 840) and (time < 1140)):
                 student_count = evening_predict([time, day])
                 student_count = int(student_count)
-            else:
-                student_count = random.choice(range(10, 30))
-                student_count = int(student_count)
-    
+           
 
-    if ((time >= 750) and (time < 820)):
-        student_count = random.choice(range(180, 300))
-        student_count = int(student_count)
-    # Now, split the total student count across buses based on preferences
     
     bus_student_count = abs(int(student_count))
 
-    # Predict density for each bus separately
     bus_density = classification_predict([time, bus_student_count, day])
 
 
@@ -518,7 +482,7 @@ async def prediction(input: PredictionInput):
 @app.post('/486-classification-prediction')
 
 async def prediction(input: PredictionInput):
-    # 🌟 Convert incoming strings to usable numbers
+ 
     time = convert_time_to_minutes(input.time)
     day = encode_day(input.day)
     x = datetime.now()
@@ -529,7 +493,6 @@ async def prediction(input: PredictionInput):
     if day == -1:
         return {"error": "Invalid day sent!"}
 
-    # 🛠 Now the rest of your original logic works exactly as before!
     bus_preferences = {'474': 0.65, '486': 0.20, '472': 0.10, '477': 0.05}
     student_count = None
 
@@ -565,19 +528,10 @@ async def prediction(input: PredictionInput):
             elif ((time >= 840) and (time < 1140)):
                 student_count = evening_predict([time, day])
                 student_count = int(student_count)
-            else:
-                student_count = random.choice(range(10, 30))
-                student_count = int(student_count)
-    
-    if ((time >= 750) and (time < 820)):
-        student_count = random.choice(range(180, 300))
-        student_count = int(student_count)
-
-    # Now, split the total student count across buses based on preferences
+            
     
     bus_student_count = abs(int(student_count))
 
-    # Predict density for each bus separately
     bus_density = classification_predict([time, bus_student_count, day])
 
 
@@ -586,7 +540,7 @@ async def prediction(input: PredictionInput):
 @app.post('/sd-pie')
 
 async def prediction(input: PredictionInput):
-    # 🌟 Convert incoming strings to usable numbers
+ 
     time = convert_time_to_minutes(input.time)
     day = encode_day(input.day)
     x = datetime.now()
@@ -597,7 +551,6 @@ async def prediction(input: PredictionInput):
     if day == -1:
         return {"error": "Invalid day sent!"}
 
-    # 🛠 Now the rest of your original logic works exactly as before!
     bus_preferences = {'474': 0.65, '486': 0.20, '472': 0.10, '477': 0.05}
     student_count = None
 
@@ -633,14 +586,8 @@ async def prediction(input: PredictionInput):
             elif ((time >= 840) and (time < 1140)):
                 student_count = evening_predict([time, day])
                 student_count = int(student_count)
-            else:
-                student_count = random.choice(range(10, 30))
-                student_count = int(student_count)
-    
-    if ((time >= 750) and (time < 820)):
-        student_count = random.choice(range(180, 300))
-        student_count = int(student_count)
-    # Now, split the total student count across buses based on preferences
+            
+ 
     
     bus_student_count = abs(int(student_count))
     print(bus_student_count)
@@ -650,12 +597,11 @@ async def prediction(input: PredictionInput):
 @app.post('/stop-density-pie')
 
 async def prediction(input: PredictionInput):
-    # 🌟 Convert incoming strings to usable numbers
+  
     time = convert_time_to_minutes(input.time)
     day = encode_day(input.day)
     x = datetime.now()
     dday = get_local_day()
-    #dday = x.strftime("%A")
     day = encode_day(dday)
 
     std_counts = []
@@ -673,7 +619,6 @@ async def prediction(input: PredictionInput):
 
                 time = convert_time_to_minutes(bus)
 
-                # 🛠 Now the rest of your original logic works exactly as before!
                 bus_preferences = {'474': 0.65, '486': 0.20, '472': 0.10, '477': 0.05}
                 student_count = None
 
@@ -709,13 +654,8 @@ async def prediction(input: PredictionInput):
                         elif ((time >= 840) and (time < 1140)):
                             student_count = evening_predict([time, day])
                             student_count = int(student_count)
-                        else:
-                            student_count = random.choice(range(10, 30))
-                            student_count = int(student_count)
-                
+                        
 
-                # Now, split the total student count across buses based on preferences
-                
                 bus_student_count = abs(int(student_count))
                 std_counts.append(bus_student_count)
     max_count = max(std_counts)
@@ -727,7 +667,7 @@ async def prediction(input: PredictionInput):
 @app.post('/evening-classification-prediction')
 
 async def prediction():
-    time = 720  # Ideally this should come from the request, but keeping as-is for now
+    time = 720  
     day = 0
 
     # Initialize student_count
@@ -754,7 +694,6 @@ async def prediction():
 
             student_count = int(closest_row['bus_stop_count'])
 
-            # Apply decay if necessary
             if closest_row['time_slot_minutes'] < time:
                 minutes_passed = time - closest_row['time_slot_minutes']
                 decay_factor = 1 - (minutes_passed / closest_time_threshold)
@@ -762,11 +701,9 @@ async def prediction():
                 student_count = student_count * decay_factor
 
         else:
-            # If no close time exists, fallback to regression model
             student_count = evening_predict([time, day])
             student_count = int(student_count)
 
-    # Now that student_count is set correctly, predict the density
     density = classification_predict([time, student_count, day])
 
     return {
